@@ -14,7 +14,6 @@
                             <select name="environment" class="form-control" id="environment">
                                 <option value="production">Production</option>
                                 <option value="beta">Beta</option>
-                                <option value="staging">Staging</option>
                             </select>
                         </div>
 
@@ -24,7 +23,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="campaignId">Enter Campaign ID (Optional)</label>
+                            <label for="campaignId">Enter Campaign ID</label>
                             <input type="text" class="form-control" id="campaignid" aria-describedby="emailHelp" placeholder="Enter Campaign ID" name="campaignid">
                         </div>
 
