@@ -34,7 +34,7 @@
 
 
 	$(function () {
-		new ClipboardJS('.btn');
+		var clipboard = new ClipboardJS('.btn');
 
 		var ajaxUrl = nexweave.ajaxUrl;
 		var nexweavePlayerUrl = nexweave.playerUrl;
@@ -60,11 +60,64 @@
 			}
 		}
 
+		function nexweaveDatatables() {
+			let export_title = "Nexweave Experience Report";
+			let filename = "Nexweave_Experience_Report"
+			// experience datatables
+			$('#experienceTable').DataTable({
+				dom: 'Bfrtip',
+				lengthMenu: [
+					[10, 25, 50, -1],
+					['10 rows', '25 rows', '50 rows', 'Show all']
+				],
+				buttons: [
+					'pageLength',
+					{
+						extend: 'copyHtml5',
+						title: export_title,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6]
+						}
+					},
+					{
+						extend: 'print',
+						title: export_title,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6]
+						}
+					},
+					{
+						extend: 'excelHtml5',
+						filename,
+						title: export_title,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6]
+						}
+					},
+					{
+						extend: 'csvHtml5',
+						filename,
+						title: export_title,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6]
+						}
+					},
+					{
+						extend: 'pdfHtml5',
+						filename,
+						title: export_title,
+						exportOptions: {
+							columns: [0, 1, 2, 3, 4, 5, 6]
+						}
+					},
+				],
+				select: true
+			});
+		}
+
 
 		$(document).ready(function () {
-			// experience datatables
-			$('#experienceTable').DataTable();
-
+			nexweaveDatatables()
 			$("#nexweave-experience-form").submit(function (e) {
 				e.preventDefault();
 
@@ -209,7 +262,7 @@
 			});
 
 			// delete shortcode from experience table
-			$(document).on("click", ".delete-short-code", function(){
+			$(document).on("click", ".delete-short-code", function () {
 
 				let id = this.dataset.id;
 				var payload = {

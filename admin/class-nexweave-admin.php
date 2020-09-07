@@ -81,7 +81,7 @@ class Nexweave_Admin
 			wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nexweave-admin.css', array(), $this->version, 'all');
 
 			// bootstrap
-			wp_enqueue_style("nexweave-bootsrap-css", NEXWEAVE_PLUGIN_URL . 'assets/css/bootstrap.css', array(), $this->version, 'all');
+			wp_enqueue_style("nexweave-bootstrap-css", NEXWEAVE_PLUGIN_URL . 'assets/css/Bootstrap/bootstrap.min.css', array(), $this->version, 'all');
 
 			// font awsome
 			wp_register_style('Nexweave Font Awesome', plugin_dir_url(__FILE__) . 'css/font-awesome-4.7.0/css/font-awesome.min.css', array(), $this->version, 'all');
@@ -91,7 +91,7 @@ class Nexweave_Admin
 			wp_register_style('Nexweave-datatables-css', plugin_dir_url(__FILE__) . 'js/DataTables/datatables.min.css', array(), $this->version, 'all');
 			wp_enqueue_style('Nexweave-datatables-css');
 
-			// datatables CSS
+			// sweetalert CSS
 			wp_register_style('Nexweave-sweetalert-css', plugin_dir_url(__FILE__) . 'js/sweet-alert/css/sweetalert2.min.css', array(), $this->version, 'all');
 			wp_enqueue_style('Nexweave-sweetalert-css');
 		}
@@ -121,21 +121,20 @@ class Nexweave_Admin
 		$page = esc_attr($_REQUEST['page']);
 
 		if (isset($_REQUEST['page']) && in_array($page, $allowed_pages)) {
-			
-			// nexweave-bootsrap.js
-			wp_enqueue_script("jquery");
-			wp_enqueue_script("nexweave-bootsrap-js", NEXWEAVE_PLUGIN_URL . 'assets/js/bootstrap.js', array('jquery'), $this->version, false);
 
-			// clipboard.js
-			wp_register_script("nexweave-clipboard-js", plugin_dir_url(__FILE__) . 'js/clipboard-js/clipboard.min.js', array('jquery'), $this->version, false);
-			wp_enqueue_script("nexweave-clipboard-js");
+			// hook core functions
+			wp_enqueue_script("jquery");
+			wp_enqueue_script("clipboard");
+
+			// nexweave-bootstrap.js
+			wp_enqueue_script("nexweave-bootstrap-js", NEXWEAVE_PLUGIN_URL . 'assets/js/Bootstrap/bootstrap.min.js', array('jquery'), $this->version, false);
 
 			// sweetalert.js
 			wp_register_script("nexweave-sweetalert-js", plugin_dir_url(__FILE__) . 'js/sweet-alert/js/sweetalert2.min.js', array('jquery'), $this->version, false);
 			wp_enqueue_script("nexweave-sweetalert-js");
 
 			// datatables.js
-			wp_register_script("nexweave-datatables-js", plugin_dir_url(__FILE__) . 'js/DataTables//datatables.min.js', array('jquery'), $this->version, false);
+			wp_register_script("nexweave-datatables-js", plugin_dir_url(__FILE__) . 'js/DataTables/datatables.min.js', array('jquery'), $this->version, false);
 			wp_enqueue_script("nexweave-datatables-js");
 
 			// nexweave-admin.js
@@ -182,16 +181,16 @@ class Nexweave_Admin
 	{
 		// handles all ajax request for admin
 		global $wpdb;
-		$params = $_REQUEST['params'];
+		$params = wp_filter_nohtml_kses($_REQUEST['params']);
 		if (!empty($params)) {
 			$params = utf8_decode(urldecode($params));
 			try {
 				$data = json_decode(stripcslashes($params));
 				$experience_id = sanitize_text_field($data->experienceId);
 				$video_height = sanitize_text_field($data->videoHeight);
-				$variables = $data->variables;
+				$variables = $data->variables; // Object of the template variables
 				$video_width = sanitize_text_field($data->videoWidth);
-				$url_params_obj = $data->urlParamsObject;
+				$url_params_obj = $data->urlParamsObject; // overrider parameter object
 				$player_url = esc_url_raw($data->playerUrl);
 				$is_form_visible = sanitize_text_field($data->isFormVisible);
 				$api_key = sanitize_text_field($data->apiKey);
@@ -203,7 +202,11 @@ class Nexweave_Admin
 
 				$paramString = '';
 				foreach ($url_params_obj as $key => $value) {
-					$paramString = "{$paramString}&{$key}={$value}";
+					if (!empty($key) && !empty($value)) {
+						$sanitized_key = sanitize_text_field($key);
+						$sanitized_value = sanitize_text_field($value);
+						$paramString = "{$paramString}&{$sanitized_key}={$sanitized_value}";
+					}
 				}
 
 				$table = $wpdb->prefix . 'nexweave';
@@ -250,7 +253,7 @@ class Nexweave_Admin
 	public function delete_record_admin()
 	{
 		global $wpdb;
-		$params = $_REQUEST['params'];
+		$params = wp_filter_nohtml_kses($_REQUEST['params']);
 		if (!empty($params)) {
 			$params = utf8_decode(urldecode($params));
 			try {

@@ -40,6 +40,7 @@ You can find docs and more detailed information about Nexweave on [nexweave.com]
 7. *"Variables override for your template"* field is useful for generating **personalized video experiences** for the users who are logged in on your WordPress platform. You can map *Available variables* with the variables value in your actual video template (This step will replace all template variables value with WordPress users information on the *personalized video experience*).
 8. Click on the magical button called **Generate short code**. This will generate a simple shortcode for your WordpPress blogs/pages. 
 9. Paste this code wherever you want on your blog/page to generate your *Nexweave Personalized Video Experience*.
+10. You can download the generated experience report from admin panel in Excel, CSV, PDF format
 
 
 **What is unique ?**

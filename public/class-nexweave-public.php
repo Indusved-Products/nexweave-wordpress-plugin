@@ -157,18 +157,21 @@ class Nexweave_Public
 	function getParams($row)
 	{
 		$params = $row->params;
+		if (!empty($params)) {
+			$current_user = wp_get_current_user();
+			$wp_username = $current_user->user_login  ?: 'Nexweaver';
+			$wp_firstname = $current_user->user_firstname ?: 'Nexweaver';
+			$wp_lastname = $current_user->user_lastname ?: 'Nexweaver';
+			$wp_email = $current_user->user_email ?: 'Nexweaver';
 
-		$current_user = wp_get_current_user();
-		$wp_username = $current_user->user_login  ?: 'Nexweaver';
-		$wp_firstname = $current_user->user_firstname ?: 'Nexweaver';
-		$wp_lastname = $current_user->user_lastname ?: 'Nexweaver';
-		$wp_email = $current_user->user_email ?: 'Nexweaver';
-
-		$params = str_replace("[WP_USERNAME]", $wp_username, $params);
-		$params = str_replace("[WP_FIRSTNAME]", $wp_firstname, $params);
-		$params = str_replace("[WP_LASTNAME]", $wp_lastname, $params);
-		$params = str_replace("[WP_EMAIL]", $wp_email, $params);
-		return $params;
+			$params = str_replace("[WP_USERNAME]", $wp_username, $params);
+			$params = str_replace("[WP_FIRSTNAME]", $wp_firstname, $params);
+			$params = str_replace("[WP_LASTNAME]", $wp_lastname, $params);
+			$params = str_replace("[WP_EMAIL]", $wp_email, $params);
+			return "?{$params}";
+		} else {
+			return "";
+		}
 	}
 
 	function getVideoDimensions($body)
@@ -218,7 +221,7 @@ class Nexweave_Public
 			}
 		}
 
-		$updatedPlayerUrl = esc_url("{$player_url}/{$experience_id}?{$params}");
+		$updatedPlayerUrl = esc_url("{$player_url}/{$experience_id}{$params}");
 		$template = "<iframe data-experience-name='{$experience_name}' frameborder='0' vH='{$videoHeight}' vW='{$videoWidth}' scrolling='no' allowfullscreen='true' onload='(function(i){const d=getAttribute(`vH`);const c=getAttribute(`vW`);const g=document.getElementById(`n-{$experience_id}`);const f=(g.clientWidth*d)/c;g.style.height=f+`px`})();' id='n-{$experience_id}' src='{$updatedPlayerUrl}'  width='100%'></iframe>{$formData}";
 
 		return $template;

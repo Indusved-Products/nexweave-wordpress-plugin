@@ -36,11 +36,14 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 
-$nexweavePlayerUrl = array('staging'=> 'https://staging.nxwv.io', 'beta'=>'https://beta.nxwv.io', 'production'=>'https://embed.nxwv.io');
+// Nexweave player URL
+$nexweavePlayerUrl = array('beta'=>'https://beta.nxwv.io', 'production'=>'https://embed.nxwv.io');
 
-$nexweaveApiUrl = array('staging'=> 'https://staging-api.nexweave.com/api/v1', 'beta'=>'https://beta-api.nexweave.com/api/v1', 'production'=>'https://api.nexweave.com/api/v1');
+// Nexweave API links
+$nexweaveApiUrl = array('beta'=>'https://beta-api.nexweave.com/api/v1', 'production'=>'https://api.nexweave.com/api/v1');
 
-$nexweavePlatformUrl = array('staging'=> 'https://staging-app.nexweave.com', 'beta'=>'https://beta-app.nexweave.com', 'production'=>'https://app.nexweave.com');
+// Nexweave Platform URL
+$nexweavePlatformUrl = array('beta'=>'https://beta-app.nexweave.com', 'production'=>'https://app.nexweave.com');
 
 define( 'NEXWEAVE_VERSION', '1.0.0' );
 define( 'NEXWEAVE_PLUGIN_URL', plugin_dir_url(__FILE__) );
