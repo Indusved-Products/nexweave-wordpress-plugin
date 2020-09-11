@@ -37,13 +37,13 @@ if ( ! defined( 'WPINC' ) ) {
  */
 
 // Nexweave player URL
-$nexweavePlayerUrl = array('staging'=>'https://staging.nxwv.io', 'beta'=>'https://beta.nxwv.io', 'production'=>'https://embed.nxwv.io');
+$nexweavePlayerUrl = array('beta'=>'https://beta.nxwv.io', 'production'=>'https://embed.nxwv.io');
 
 // Nexweave API links
-$nexweaveApiUrl = array('staging'=>'http://3ff6cbab8741.ngrok.io/api/v1','beta'=>'https://beta-api.nexweave.com/api/v1', 'production'=>'https://api.nexweave.com/api/v1');
+$nexweaveApiUrl = array('beta'=>'https://beta-api.nexweave.com/api/v1', 'production'=>'https://api.nexweave.com/api/v1');
 
 // Nexweave Platform URL
-$nexweavePlatformUrl = array('staging'=>'https://staging-app.nexweave.com', 'beta'=>'https://beta-app.nexweave.com', 'production'=>'https://app.nexweave.com');
+$nexweavePlatformUrl = array('beta'=>'https://beta-app.nexweave.com', 'production'=>'https://app.nexweave.com');
 
 define( 'NEXWEAVE_VERSION', '1.0.0' );
 define( 'NEXWEAVE_PLUGIN_URL', plugin_dir_url(__FILE__) );
