@@ -30,8 +30,8 @@
 					delete values.campaign_id;
 					const userdata = values
 					var payload = {
-						"_template": `${template_id}`,
-						"campaign_id": `${campaign_id}`,
+						template_id,
+						campaign_id,
 						"data": {
 							...userdata
 						}
@@ -46,10 +46,10 @@
 							'Content-Type': 'application/json'
 						},
 						success: function (res) {
-							if (res.url) {
+							if (res.video_link) {
 								$('#generated-link-wrapper').show();
-								$('#nexweave-generated-link').html(res.url)
-								$('#nexweave-generated-link').attr('href', res.url)
+								$('#nexweave-generated-link').html(res.video_link)
+								$('#nexweave-generated-link').attr('href', res.video_link)
 							} else {
 								
 							}
