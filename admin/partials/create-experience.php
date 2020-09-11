@@ -14,6 +14,7 @@
                             <select name="environment" class="form-control" id="environment">
                                 <option value="production">Production</option>
                                 <option value="beta">Beta</option>
+                                <option value="staging">Staging</option>
                             </select>
                         </div>
 
