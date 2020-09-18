@@ -225,9 +225,9 @@ class Nexweave_Admin
 					"campaign_id" => $campaign_id,
 					"form_title" => $form_title,
 					"button_text" => $button_text,
-					"created_at" => date("Y-m-d H:i:s", strtotime("now"))
+					// "created_at" => date("Y-m-d H:i:s", strtotime("now"))
 				);
-				$format = array('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d');
+				$format = array('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
 				$success = $wpdb->insert($table, $data, $format);
 				$lastid = $wpdb->insert_id;
 

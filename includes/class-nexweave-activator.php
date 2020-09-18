@@ -55,7 +55,7 @@ class Nexweave_Activator
 						`form_title` varchar(1000) NOT NULL DEFAULT 'Generate personalized video for your friends',
 						`button_text` varchar(1000) NOT NULL DEFAULT 'Send your friends a message too',
 						`is_active` int(11) NOT NULL DEFAULT '1',
-						`created_at` DATETIME NOT NULL,
+						`created_at` DATETIME NOT NULL DEFAULT current_timestamp(),
 						PRIMARY KEY  (id)) {$charset_collate}";
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
