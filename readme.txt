@@ -1,13 +1,12 @@
 === Nexweave ===
 Contributors: nexweave
 Donate link: 
-Tags: video, video Personalization, video experience
-Requires at least: 4.0
-Tested up to: 5.6
+Tags: video, video personalization, video experience
+Requires at least: 5.2
+Tested up to: 5.5.1
 Stable tag: 1.0.0
-Requires PHP: 5.4
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Create Interactive Videos with Personalization on your WordPress pages, blogs. Engage your audiences with interactive videos that can be personalized for millions!
 
