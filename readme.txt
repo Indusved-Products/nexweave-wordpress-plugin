@@ -1,10 +1,10 @@
 === Nexweave ===
 Contributors: nexweave
 Donate link: 
-Tags: video, video personalization, video experience
+Tags: video, personalization, video experience
 Requires at least: 5.2
 Tested up to: 5.5.1
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,12 @@ Absolutely not. While Nexweave plugin has been designed to be very user-friendly
 
 == Changelog ==
 
+= 1.0.0 =
+* Initial release of Nexweave plugin
+
+= 1.1.0 =
+* Now user can override experience variables with URL parameters
+* Add VAR_ as a prefix to any experience variable in URL parameter to override the variable
 
 == Upgrade Notice ==
 

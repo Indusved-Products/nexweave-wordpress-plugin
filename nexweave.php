@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://nexweave.com
- * @since             1.0.0
+ * @since             1.1.0
  * @package           Nexweave
  *
  * @wordpress-plugin
  * Plugin Name:       Nexweave
  * Plugin URI:        https://documentation.nexweave.com/wordpress-plugin
  * Description:       Create Interactive Videos with Personalization on your wordpress pages, blogs.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Nexweave
  * Author URI:        https://nexweave.com
  * License:           GPL-2.0+
@@ -45,7 +45,7 @@ $nexweaveApiUrl = array('beta'=>'https://beta-api.nexweave.com/api/v1', 'product
 // Nexweave Platform URL
 $nexweavePlatformUrl = array('beta'=>'https://beta-app.nexweave.com', 'production'=>'https://app.nexweave.com');
 
-define( 'NEXWEAVE_VERSION', '1.0.0' );
+define( 'NEXWEAVE_VERSION', '1.1.0' );
 define( 'NEXWEAVE_PLUGIN_URL', plugin_dir_url(__FILE__) );
 define( 'NEXWEAVE_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 define( 'NEXWEAVE_PLAYER_URL', $nexweavePlayerUrl );

@@ -156,22 +156,25 @@ class Nexweave_Public
 
 	function getParams($row)
 	{
+		$output = "?";
 		$params = $row->params;
 		if (!empty($params)) {
 			$current_user = wp_get_current_user();
-			$wp_username = $current_user->user_login  ?: 'Nexweaver';
-			$wp_firstname = $current_user->user_firstname ?: 'Nexweaver';
-			$wp_lastname = $current_user->user_lastname ?: 'Nexweaver';
-			$wp_email = $current_user->user_email ?: 'Nexweaver';
+
+			$wp_username = empty($current_user->user_login) ? 'Nexweaver' : $current_user->user_login;
+			$wp_firstname = empty($current_user->user_firstname) ? 'Nexweaver' : $current_user->user_firstname;
+			$wp_lastname = empty($current_user->user_lastname) ? 'Nexweaver' : $current_user->user_lastname;
+			$wp_email = empty($current_user->user_email) ? 'Nexweaver' : $current_user->user_email;
 
 			$params = str_replace("[WP_USERNAME]", $wp_username, $params);
 			$params = str_replace("[WP_FIRSTNAME]", $wp_firstname, $params);
 			$params = str_replace("[WP_LASTNAME]", $wp_lastname, $params);
 			$params = str_replace("[WP_EMAIL]", $wp_email, $params);
-			return "?{$params}";
 		} else {
-			return "";
+			$params = "";
 		}
+		$output .= sanitize_text_field($this->get_all_url_params().$params);
+		return $output;
 	}
 
 	function getVideoDimensions($body)
@@ -188,6 +191,25 @@ class Nexweave_Public
 			$videoWidth = $body['experience']['_template']['meta']['desktop']['videoWidth'];
 		}
 		return array('videoHeight' => $videoHeight, 'videoWidth' => $videoWidth);
+	}
+
+	function get_all_url_params()
+	{
+		$output = "";
+		$firstRun = true;
+		foreach ($_GET as $key => $val) {
+			if ($key != $parameter) {
+				$key = str_replace('VAR_', '', $key);
+				if (!$firstRun) {
+					$output .= "&";
+				} else {
+					$firstRun = false;
+				}
+				$output .= sanitize_text_field($key) . "=" . urlencode(sanitize_text_field($val));
+			}
+		}
+
+		return $output;
 	}
 
 	public function load_nexweave_experience($attr)
@@ -220,6 +242,8 @@ class Nexweave_Public
 				$videoWidth = esc_attr($videoDimensions('videoWidth'));
 			}
 		}
+
+		// print_r(parse_url($_SERVER['REQUEST_URI'])['query']);
 
 		$updatedPlayerUrl = esc_url("{$player_url}/{$experience_id}{$params}");
 		$template = "<iframe data-experience-name='{$experience_name}' frameborder='0' vH='{$videoHeight}' vW='{$videoWidth}' scrolling='no' allowfullscreen='true' onload='(function(i){const d=getAttribute(`vH`);const c=getAttribute(`vW`);const g=document.getElementById(`n-{$experience_id}`);const f=(g.clientWidth*d)/c;g.style.height=f+`px`})();' id='n-{$experience_id}' src='{$updatedPlayerUrl}'  width='100%'></iframe>{$formData}";
